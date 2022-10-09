@@ -38,27 +38,70 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+     const fifteens = inventors.filter(inventors => inventors.year > 1499 && inventors.year < 1600);
+     console.log(fifteens);
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+
+    const names = inventors.map(inventors => inventors.first + ' ' + inventors.last);
+    console.table(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    function compareNumbers(a, b) {
+      return (a.year - b.year);
+    }
+
+    const years = inventors.sort(compareNumbers);
+    console.table(years);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    const initNums = inventors.map(inventor => inventor.passed - inventor.year);
+
+    const totalLived = initNums.reduce((previousValue, currentValue) => previousValue + currentValue);
+    console.log(`The inventors lived a total combined ${totalLived} years.`);
+
     // 5. Sort the inventors by years lived
 
+    function longevity(a, b) {
+      return ((a.passed - a.year) - (b.passed - b.year));
+    }
+
+    const yearsLived = inventors.sort(longevity);
+    console.table(yearsLived);
+    
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
+   /* const category = document.querySelector('.mw-category');
+    const links = Array.from(category.querySelectorAll('a'));
+    const de = links
+            .map(link => link.textContent)
+            .filter(streetName => streetName.includes('de'));
+    */
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    console.table(people.sort());
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const transportation = data.reduce(function(obj, item) {
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(transportation);
+
 
   </script>
 </body>
