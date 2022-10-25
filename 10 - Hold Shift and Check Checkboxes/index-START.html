@@ -58,44 +58,88 @@
   -->
   <div class="inbox">
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>This is an inbox layout.</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Check one item</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Hold down your Shift key</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Check a lower item</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Everything in between should also be set to checked</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Try to do it without any libraries</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Just regular JavaScript</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Good Luck!</p>
     </div>
     <div class="item">
-      <input type="checkbox">
+      <input class="checkbox" type="checkbox" onclick="checkBoxes()">
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
 
 <script>
+  let shiftHeld = false
+
+  document.addEventListener("keydown", (event) => {
+    if(event.key === 'Shift') {
+      shiftHeld = true;
+    }
+  })
+
+  document.addEventListener("keyup", (event) => {
+    if(event.key === 'Shift') {
+      shiftHeld = false;
+    }
+  })
+
+  function checkBoxes() {
+    if(shiftHeld === true) {
+      console.log('waffles');
+    }
+
+    let checkBoxes = [];
+    checkBoxes = document.querySelectorAll('.checkbox');
+    let alpha;
+    let beta;
+
+    for(let x = 0; x < checkBoxes.length; x++) {
+        if(checkBoxes[x].checked && alpha == null) {
+          alpha = x;
+     } else if(checkBoxes[x].checked && alpha !== null) {
+          beta = x;
+        }
+    }
+    console.log(alpha, beta);
+
+
+    if(shiftHeld === true && alpha !== null && beta !== null) {
+      for(let a = alpha; a < beta; a++) {
+        checkBoxes[a].checked = true;
+      }
+    }
+
+  }
+
+  checkBoxes();
+
 </script>
 </body>
 </html>
